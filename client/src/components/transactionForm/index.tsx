@@ -28,6 +28,7 @@ const TransactionFrom = () => {
     control,
     handleSubmit,
     formState: { errors },
+    reset
   } = useForm({
     resolver: yupResolver(transactionSchema),
     defaultValues: { transactionType: TransactionType.Deposit },
@@ -37,6 +38,7 @@ const TransactionFrom = () => {
 
   const onSubmit = (value: TransType) => {
     createTransaction(value);
+    reset()
   };
 
   return (
@@ -64,7 +66,7 @@ const TransactionFrom = () => {
           <Controller
             name="amount"
             control={control}
-            render={({ field }) => (
+            render={({ field }) => (g
               <TextField
                 label="Amount"
                 placeholder="Set your Amount"
@@ -79,7 +81,6 @@ const TransactionFrom = () => {
           <Button
             onClick={handleSubmit(onSubmit)}
             sx={{ textAlign: "center" }}
-            //   disabled={Object.keys(errors).length !== 0}
           >
             Make Transaction
           </Button>

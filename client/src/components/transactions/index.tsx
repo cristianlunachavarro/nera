@@ -47,6 +47,10 @@ const Transactions = () => {
     return new Date(dateString).toLocaleDateString("en-US", options);
   };
 
+  const formatAmount = (amount: number | string) => {
+    return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  }
+
   return (
     <div className={styles.tableContainer}>
       <h1>Transactions History</h1>
@@ -79,7 +83,7 @@ const Transactions = () => {
                 {trans.transactionType.toUpperCase()}
               </TableCell>
               <TableCell className={styles.tableCell}>
-                {`$ ${trans.amount}`}
+                {`$ ${formatAmount(trans.amount)}`}
               </TableCell>
               <TableCell className={styles.tableCell}>
                 {formatDate(trans.createdAt)}

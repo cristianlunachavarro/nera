@@ -7,6 +7,10 @@ import styles from "./Info.module.css";
 const Info = () => {
   const { user } = useContext(AuthContext);
 
+  const formatAmount = (amount: number | undefined) => {
+    return amount && amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  }
+
   return (
     <div className={styles.infoContainer}>
       <h1>Account Information</h1>
@@ -36,7 +40,7 @@ const Info = () => {
             </Grid>
             <Grid item xs={12}>
               <Typography variant="h6" align="center">
-                $ {user?.balance?.toFixed(2)}
+                $ {formatAmount(user?.balance)}
               </Typography>
             </Grid>
           </Grid>
