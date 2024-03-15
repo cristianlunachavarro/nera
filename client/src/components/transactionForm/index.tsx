@@ -66,7 +66,7 @@ const TransactionFrom = () => {
           <Controller
             name="amount"
             control={control}
-            render={({ field }) => (g
+            render={({ field }) => (
               <TextField
                 label="Amount"
                 placeholder="Set your Amount"
