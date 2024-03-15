@@ -1,0 +1,11 @@
+.tableContainer {
+    width: 70%;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.tableCell {
+    text-align: center;
+}
