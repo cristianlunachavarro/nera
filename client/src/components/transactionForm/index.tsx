@@ -27,8 +27,9 @@ const TransactionFrom = () => {
   const {
     control,
     handleSubmit,
+    setValue, 
     formState: { errors },
-    reset
+    reset,
   } = useForm({
     resolver: yupResolver(transactionSchema),
     defaultValues: { transactionType: TransactionType.Deposit },
@@ -38,7 +39,9 @@ const TransactionFrom = () => {
 
   const onSubmit = (value: TransType) => {
     createTransaction(value);
-    reset()
+    reset();
+    setValue("amount", 0);
+    setValue("transactionType", TransactionType.Deposit);
   };
 
   return (
@@ -68,20 +71,21 @@ const TransactionFrom = () => {
             control={control}
             render={({ field }) => (
               <TextField
+                {...field}
                 label="Amount"
                 placeholder="Set your Amount"
                 autoFocus
                 className={styles.input}
                 error={!!errors.amount}
                 helperText={errors.amount?.message}
-                {...field}
+                onChange={(e) => {
+                  const value = e.target.value.replace(/\D/g, "");
+                  setValue("amount", value);
+                }}
               />
             )}
           />
-          <Button
-            onClick={handleSubmit(onSubmit)}
-            sx={{ textAlign: "center" }}
-          >
+          <Button onClick={handleSubmit(onSubmit)} sx={{ textAlign: "center" }}>
             Make Transaction
           </Button>
         </CardContent>
