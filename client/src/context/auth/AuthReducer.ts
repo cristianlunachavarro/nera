@@ -2,7 +2,7 @@ import { User } from "../../interface/User";
 import { ActionTypes } from "../../constants";
 
 interface UserState {
-  user: User | {};
+  user: User | undefined;
   error: string;
 }
 
@@ -11,9 +11,10 @@ export type UserActionTypes =
   | { type: ActionTypes.CREATE_USER_FAIL; payload: string }
   | { type: ActionTypes.LOGIN_SUCCESS; payload: User }
   | { type: ActionTypes.LOGIN_FAIL; payload: string }
-  | { type: ActionTypes.LOGOUT_SUCCESS; payload: {} }
+  | { type: ActionTypes.LOGOUT_SUCCESS; payload: undefined }
   | { type: ActionTypes.LOGOUT_FAIL; payload: string }
   | { type: ActionTypes.UPDATE_USER; payload: User }
+  | { type: ActionTypes.CLEAN_ERROR; payload: string };
 
 export const AUTH_INITIAL_STATE: UserState = {
   user: {
@@ -48,9 +49,10 @@ export const authReducer = (
 
     case ActionTypes.LOGOUT_FAIL:
       return { ...state, error: action.payload };
-
     case ActionTypes.UPDATE_USER:
       return { ...state, user: action.payload };
+    case ActionTypes.CLEAN_ERROR:
+      return { ...state, error: action.payload };
     default:
       return state;
   }

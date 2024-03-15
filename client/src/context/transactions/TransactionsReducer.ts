@@ -13,7 +13,7 @@ export type TransactionsrActionTypes =
   | { type: ActionTypes.GET_TRANSACTIONS_SUCCESS; payload: Transaction[] }
   | { type: ActionTypes.GET_TRANSACTIONS_FAIL; payload: string }
   | { type: ActionTypes.CLEAN_ERROR; payload: string }
-  | { type: ActionTypes.IS_LOADING; payload: boolean };
+  | { type: ActionTypes.IS_LOADING; payload: boolean }
 
 export const TRANSACTIONS_INITIAL_STATE: TransactionsState = {
   transactions: [],

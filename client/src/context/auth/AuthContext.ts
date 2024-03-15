@@ -6,6 +6,7 @@ interface ContextProps {
   error?: string;
   login: (value: { username: string; password: string }) => void;
   logout: () => void;
+  cleanError: () => void;
   register: (value: {
     username: string;
     name: string;

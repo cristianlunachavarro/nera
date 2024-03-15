@@ -13,7 +13,7 @@ import Layout from "@/components/layout";
 import styles from "./Login.module.css";
 
 const loginSchema = yup.object({
-  username: yup.string().label('Username').min(2).required(),
+  username: yup.string().label('Username').min(10).required(),
   password: yup
   .string()
   .label('Password')

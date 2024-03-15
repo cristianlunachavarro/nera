@@ -15,7 +15,7 @@ enum TransactionType {
 }
 
 const transactionSchema = yup.object({
-  amount: yup.number().label("Amount").min(3).required(),
+  amount: yup.number().label("Amount").min(1000).max(100000).required(),
   transactionType: yup
     .string()
     .oneOf(Object.values(TransactionType))
@@ -33,9 +33,9 @@ const TransactionFrom = () => {
     defaultValues: { transactionType: TransactionType.Deposit },
   });
 
-  type TransactionType = yup.InferType<typeof transactionSchema>;
+  type TransType = yup.InferType<typeof transactionSchema>;
 
-  const onSubmit = (value: TransactionType) => {
+  const onSubmit = (value: TransType) => {
     createTransaction(value);
   };
 

@@ -1,7 +1,11 @@
 import { useReducer, ReactNode, FC, useEffect } from "react";
 import { useRouter } from "next/router";
 
-import { AUTH_INITIAL_STATE, AuthContext, UserActionTypes, UserState, authReducer } from ".";
+import {
+  AUTH_INITIAL_STATE,
+  AuthContext,
+  authReducer,
+} from ".";
 
 import { User, Error } from "@/interface/User";
 
@@ -17,7 +21,7 @@ interface AuthState {
 
 export const AuthProvider: FC<AuthState> = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, AUTH_INITIAL_STATE);
-  
+
   const router = useRouter();
   const { isAuthenticated } = useAuthentication();
 
@@ -85,6 +89,10 @@ export const AuthProvider: FC<AuthState> = ({ children }) => {
     }
   };
 
+  const cleanError = () => {
+    dispatch({ type: ActionTypes.CLEAN_ERROR, payload: "" });
+  };
+
   const updateUser = (user: User) => {
     dispatch({ type: ActionTypes.UPDATE_USER, payload: user });
   };
@@ -97,7 +105,7 @@ export const AuthProvider: FC<AuthState> = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ ...state, login, register, logout, updateUser }}
+      value={{ ...state, login, register, logout, updateUser, cleanError }}
     >
       {children}
     </AuthContext.Provider>
